@@ -1,0 +1,12 @@
+{
+  "name": "auramark-ai-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ClearMark — Remove marks. Keep memories.",
+  "scripts": {
+    "start": "start.bat",
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "install:all": "npm install --prefix frontend && pip install -r backend/requirements.txt"
+  }
+}

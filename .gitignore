@@ -1,0 +1,36 @@
+# Environment variables
+.env
+.env.local
+*.env
+backend/.env
+
+# Dependencies
+node_modules/
+backend/__pycache__/
+__pycache__/
+*.pyc
+*.pyo
+
+# Build & Dist
+frontend/dist/
+dist/
+
+# Storage & Temporary Files
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/outputs/*
+!backend/outputs/.gitkeep
+backend/temp/*
+!backend/temp/.gitkeep
+
+# Large AI Model Weights (>100MB exceeds GitHub file size limit)
+backend/models/*.onnx
+backend/models/*.pt
+backend/models/*.bin
+!backend/models/README.md
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

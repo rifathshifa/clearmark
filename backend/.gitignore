@@ -1,0 +1,14 @@
+# Environment variables
+.env
+.env.local
+*.env
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary and local storage
+uploads/
+outputs/
+temp/
