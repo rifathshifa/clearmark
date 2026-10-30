@@ -16,6 +16,7 @@ import {
   Info
 } from 'lucide-react';
 import CanvasEditor from './CanvasEditor';
+import { API_URL } from '../config';
 
 export default function VideoRemover({ backendStatus }) {
   const [selectedVideoFile, setSelectedVideoFile] = useState(null);
@@ -114,7 +115,6 @@ export default function VideoRemover({ backendStatus }) {
       formData.append('mask_base64', maskDataUrl);
       formData.append('mode', selectedEngine);
 
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       const response = await fetch(`${API_URL}/api/inpaint/video`, {
         method: 'POST',
         body: formData
@@ -137,7 +137,6 @@ export default function VideoRemover({ backendStatus }) {
   const startPolling = (id) => {
     if (pollingRef.current) clearInterval(pollingRef.current);
 
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
     pollingRef.current = setInterval(async () => {
       try {
         const res = await fetch(`${API_URL}/api/inpaint/video/status/${id}`);

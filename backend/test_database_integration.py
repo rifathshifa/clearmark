@@ -53,8 +53,8 @@ class TestDatabaseIntegration(unittest.TestCase):
     def test_02_database_operations(self):
         """Test DB operations if DATABASE_URL is configured."""
         url = get_db_url()
-        if not url:
-            print("[INFO] DATABASE_URL not configured yet. Skipping live database query tests.")
+        if not url or "********" in url or "password" in url:
+            print("[INFO] DATABASE_URL not configured with live credentials. Skipping live database query tests.")
             return
 
         print(f"[INFO] Testing live connection to: {url.split('@')[-1] if '@' in url else 'database'}")

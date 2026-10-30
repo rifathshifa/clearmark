@@ -199,11 +199,16 @@ def init_db(custom_url=None):
         return False
 
     try:
-        # Create SQLAlchemy engine with connection pool recycling
+        # Create SQLAlchemy engine with connection pool recycling and 10s connect timeout
+        connect_args = {}
+        if "postgresql" in target_url:
+            connect_args["connect_timeout"] = 10
+
         engine = create_engine(
             target_url,
             pool_recycle=300,
             pool_pre_ping=True,
+            connect_args=connect_args,
             echo=False
         )
 

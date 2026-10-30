@@ -15,13 +15,12 @@ import {
   CheckCircle2,
   AlertCircle
 } from 'lucide-react';
+import { API_URL } from '../config';
 
 export default function HistoryModal({ isOpen, onClose }) {
   const [historyData, setHistoryData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   const fetchHistory = async () => {
     setLoading(true);

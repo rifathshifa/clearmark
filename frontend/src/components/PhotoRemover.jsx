@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import CanvasEditor from './CanvasEditor';
 import ComparisonViewer from './ComparisonViewer';
+import { API_URL } from '../config';
 
 export default function PhotoRemover({ backendStatus }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -85,7 +86,6 @@ export default function PhotoRemover({ backendStatus }) {
       formData.append('mode', selectedEngine);
       formData.append('feather', feather);
 
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
       const response = await fetch(`${API_URL}/api/inpaint/photo`, {
         method: 'POST',
         body: formData

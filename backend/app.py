@@ -26,7 +26,7 @@ from database import (
 
 # Initialize Flask App
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
@@ -605,7 +605,36 @@ def delete_file_record(file_id):
     return jsonify({"error": "Database not connected"}), 503
 
 
+# ==========================================
+# Static Frontend Serving for Production
+# ==========================================
+FRONTEND_DIST = os.path.join(os.path.dirname(BASE_DIR), "frontend", "dist")
+if not os.path.exists(FRONTEND_DIST):
+    FRONTEND_DIST = os.path.join(BASE_DIR, "dist")
+
+
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_frontend(path):
+    """Serves the production React frontend when built, or fallback API status."""
+    if path.startswith("api/"):
+        return jsonify({"error": "Endpoint not found"}), 404
+
+    full_path = os.path.join(FRONTEND_DIST, path)
+    if path and os.path.isfile(full_path):
+        return send_from_directory(FRONTEND_DIST, path)
+    elif os.path.exists(os.path.join(FRONTEND_DIST, "index.html")):
+        return send_from_directory(FRONTEND_DIST, "index.html")
+    else:
+        return jsonify({
+            "name": "ClearMark API",
+            "tagline": "Remove marks. Keep memories.",
+            "status": "online",
+            "message": "ClearMark backend is running. Build frontend with 'npm run build' to serve UI."
+        })
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    print(f"=== Starting AuraMark AI Server on http://localhost:{port} ===")
+    print(f"=== Starting ClearMark Server on http://0.0.0.0:{port} ===")
     app.run(host="0.0.0.0", port=port, debug=False)

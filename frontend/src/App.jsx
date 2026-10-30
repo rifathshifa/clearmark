@@ -5,14 +5,13 @@ import VideoRemover from './components/VideoRemover';
 import LegalModal from './components/LegalModal';
 import HistoryModal from './components/HistoryModal';
 import { Shield, Cpu } from 'lucide-react';
+import { API_URL } from './config';
 
 export default function App() {
   const [activeMode, setActiveMode] = useState('photo'); // 'photo' | 'video'
   const [backendStatus, setBackendStatus] = useState(null);
   const [isLegalOpen, setIsLegalOpen] = useState(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
-
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const fetchStatus = async () => {

@@ -34,3 +34,8 @@ backend/models/*.bin
 Thumbs.db
 .vscode/
 .idea/
+
+# Local test artifacts
+test_input.*
+temp_raw.*
+*.log
