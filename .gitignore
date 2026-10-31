@@ -12,8 +12,10 @@ __pycache__/
 *.pyo
 
 # Build & Dist
-frontend/dist/
-dist/
+/dist/
+!frontend/dist/**
+!backend/dist/**
+
 
 # Storage & Temporary Files
 backend/uploads/*
